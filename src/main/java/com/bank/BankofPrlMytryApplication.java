@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class BankofPrlMytryApplication {
 
@@ -27,16 +29,29 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Role roleAdmin = new Role();
-		roleAdmin.setName(UserRoleName.ROLE_ADMIN);
-		roleRepo.save(roleAdmin);
 
-		Role roleEmployee = new Role();
-		roleAdmin.setName(UserRoleName.ROLE_EMPLOYEE);
-		roleRepo.save(roleEmployee);
+		Optional<Role> admin =  roleRepo.findByName(UserRoleName.ROLE_ADMIN);
+		Optional<Role> employee =  roleRepo.findByName(UserRoleName.ROLE_EMPLOYEE);
+		Optional<Role> customer =  roleRepo.findByName(UserRoleName.ROLE_CUSTOMER);
 
-		Role roleCustomer = new Role();
-		roleAdmin.setName(UserRoleName.ROLE_CUSTOMER);
-		roleRepo.save(roleCustomer);
+		if(!admin.isPresent()){
+			Role roleAdmin = new Role();
+			roleAdmin.setName(UserRoleName.ROLE_ADMIN);
+			roleRepo.save(roleAdmin);
+		}
+		if(!employee.isPresent()){
+			Role roleEmployee = new Role();
+			roleEmployee.setName(UserRoleName.ROLE_EMPLOYEE);
+			roleRepo.save(roleEmployee);
+		}
+		if(!customer.isPresent()){
+			Role roleCustomer = new Role();
+			roleCustomer.setName(UserRoleName.ROLE_CUSTOMER);
+			roleRepo.save(roleCustomer);
+		}
+
+
+
+
 	}
 }
