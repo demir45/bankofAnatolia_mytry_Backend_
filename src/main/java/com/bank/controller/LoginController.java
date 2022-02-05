@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Map;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://bankofprl.netlify.app", allowedHeaders = "*")
 @AllArgsConstructor
 @RestController
 public class LoginController {

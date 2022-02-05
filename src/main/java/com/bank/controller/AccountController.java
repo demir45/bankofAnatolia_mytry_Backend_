@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://bankofprl.netlify.app", allowedHeaders = "*")
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {

@@ -1,6 +1,7 @@
 package com.bank;
 
 import com.bank.model.Role;
+import com.bank.model.User;
 import com.bank.model.enumeration.UserRoleName;
 import com.bank.repository.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -49,8 +52,6 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			roleCustomer.setName(UserRoleName.ROLE_CUSTOMER);
 			roleRepo.save(roleCustomer);
 		}
-
-
 
 
 	}
