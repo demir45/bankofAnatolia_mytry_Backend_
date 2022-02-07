@@ -2,8 +2,10 @@ package com.bank;
 
 import com.bank.model.Role;
 import com.bank.model.User;
+import com.bank.model.UserRole;
 import com.bank.model.enumeration.UserRoleName;
 import com.bank.repository.RoleRepo;
+import com.bank.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +31,9 @@ class DemoCommandLineRunner implements CommandLineRunner{
 	 @Autowired
 	 RoleRepo roleRepo;
 
+	 @Autowired
+	UserRepo userRepo;
+
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -52,6 +57,27 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			roleCustomer.setName(UserRoleName.ROLE_CUSTOMER);
 			roleRepo.save(roleCustomer);
 		}
+
+		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
+		if(!userADmin.isPresent()){
+
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			User user = new User();
+			UserRole userRole = new UserRole();
+
+			user.setSsn("123-45-6789");
+			user.setFirstName("John");
+			user.setLastName("Wick");
+			user.setEmail("wick@gmail.com");
+			user.setPassword("12345");
+			user.setUsername("johnwick");
+			user.setDob(LocalDate.of(1995, 12, 15));
+
+			userRole.setUser(user);
+			userRole.setRole(admin.get());
+			userRepo.save(user);
+		}
+
 
 
 	}
