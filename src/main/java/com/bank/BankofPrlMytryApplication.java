@@ -8,7 +8,6 @@ import com.bank.repository.RoleRepo;
 import com.bank.repository.UserRepo;
 import com.bank.repository.UserRoleRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,19 +30,13 @@ public class BankofPrlMytryApplication {
 @AllArgsConstructor
 class DemoCommandLineRunner implements CommandLineRunner{
 
-//	 @Autowired
-	 private final RoleRepo roleRepo;
-
-//	 @Autowired
-private final UserRepo userRepo;
-
-//	 @Autowired
-private final UserRoleRepo userRoleRepo;
-
+	private final RoleRepo roleRepo;
+	private final UserRepo userRepo;
+	private final UserRoleRepo userRoleRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		// add role name
 		Optional<Role> admin =  roleRepo.findByName(UserRoleName.ROLE_ADMIN);
 		Optional<Role> employee =  roleRepo.findByName(UserRoleName.ROLE_EMPLOYEE);
 		Optional<Role> customer =  roleRepo.findByName(UserRoleName.ROLE_CUSTOMER);
@@ -64,6 +57,7 @@ private final UserRoleRepo userRoleRepo;
 			roleRepo.save(roleCustomer);
 		}
 
+		// add admin
 		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
 
 		if(!userADmin.isPresent()){
@@ -88,8 +82,5 @@ private final UserRoleRepo userRoleRepo;
 			userRole.setRole(admin.get());
 			userRoleRepo.save(userRole);
 		}
-
-
-
 	}
 }
