@@ -6,6 +6,8 @@ import com.bank.model.UserRole;
 import com.bank.model.enumeration.UserRoleName;
 import com.bank.repository.RoleRepo;
 import com.bank.repository.UserRepo;
+import com.bank.repository.UserRoleRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,13 +28,17 @@ public class BankofPrlMytryApplication {
 }
 
 @Component
+@AllArgsConstructor
 class DemoCommandLineRunner implements CommandLineRunner{
 
-	 @Autowired
-	 RoleRepo roleRepo;
+//	 @Autowired
+	 private final RoleRepo roleRepo;
 
-	 @Autowired
-	UserRepo userRepo;
+//	 @Autowired
+private final UserRepo userRepo;
+
+//	 @Autowired
+private final UserRoleRepo userRoleRepo;
 
 
 	@Override
@@ -65,7 +71,6 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			User user = new User();
 
-
 			user.setSsn("123-45-6789");
 			user.setFirstName("John");
 			user.setLastName("Wick");
@@ -78,9 +83,10 @@ class DemoCommandLineRunner implements CommandLineRunner{
 		}
 		if(userADmin.get().getUserRoles().isEmpty()){
 			UserRole userRole = new UserRole();
-// gahs
+
 			userRole.setUser(userADmin.get());
 			userRole.setRole(admin.get());
+			userRoleRepo.save(userRole);
 		}
 
 
