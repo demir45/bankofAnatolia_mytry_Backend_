@@ -78,6 +78,7 @@ class DemoCommandLineRunner implements CommandLineRunner{
 		}
 		if(userADmin.get().getUserRoles().isEmpty()){
 			UserRole userRole = new UserRole();
+// gahs
 			userRole.setUser(userADmin.get());
 			userRole.setRole(admin.get());
 		}
