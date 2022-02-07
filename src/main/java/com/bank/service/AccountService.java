@@ -44,9 +44,6 @@ public class AccountService {
 
     public Map<String, Boolean> createAccount(Account account) throws BadRequestException {
 
-
-        System.out.println("AccountService / createAccount createDate : " + account.getCreateDate());
-        System.out.println("AccountService / createAccount closedDate : " + account.getClosedDate());
         accountRepo.save(account);
 
         Map<String, Boolean> map = new HashMap<>();
