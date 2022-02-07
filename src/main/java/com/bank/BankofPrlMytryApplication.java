@@ -62,9 +62,6 @@ class DemoCommandLineRunner implements CommandLineRunner{
 		// add admin
 		Optional<User> userAdmin = userRepo.findBySsn("123-45-6789");
 
-		String encodedPassword = passwordEncoder.encode(userAdmin.get().getPassword());
-		userAdmin.get().setPassword(encodedPassword);
-		userRepo.save(userAdmin.get());
 		if(!userAdmin.isPresent()){
 
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -74,7 +71,7 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			user.setFirstName("John");
 			user.setLastName("Wick");
 			user.setEmail("wick@gmail.com");
-			user.setPassword("123456");
+			user.setPassword(passwordEncoder.encode("123456"));
 			user.setUsername("johnwick");
 			user.setDob(LocalDate.of(1995, 12, 15));
 
