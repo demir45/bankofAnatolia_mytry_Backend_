@@ -59,6 +59,8 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 		// add admin
 		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
+		userADmin.get().setPassword("123456");
+		userRepo.save(userADmin.get());
 
 		if(!userADmin.isPresent()){
 
