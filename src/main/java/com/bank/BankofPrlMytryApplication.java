@@ -61,9 +61,11 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 		// add admin
 		Optional<User> userAdmin = userRepo.findBySsn("123-45-6789");
-		String encodedPassword = passwordEncoder.encode("123456");
+	/*	String encodedPassword = passwordEncoder.encode("123456");
 		userAdmin.get().setPassword(encodedPassword);
 		userRepo.save(userAdmin.get());
+
+	 */
 		if(!userAdmin.isPresent()){
 
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
