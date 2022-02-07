@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -33,6 +34,7 @@ class DemoCommandLineRunner implements CommandLineRunner{
 	private final RoleRepo roleRepo;
 	private final UserRepo userRepo;
 	private final UserRoleRepo userRoleRepo;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -58,9 +60,12 @@ class DemoCommandLineRunner implements CommandLineRunner{
 		}
 
 		// add admin
-		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
+		Optional<User> userAdmin = userRepo.findBySsn("123-45-6789");
 
-		if(!userADmin.isPresent()){
+		String encodedPassword = passwordEncoder.encode(userAdmin.get().getPassword());
+		userAdmin.get().setPassword(encodedPassword);
+		userRepo.save(userAdmin.get());
+		if(!userAdmin.isPresent()){
 
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			User user = new User();
@@ -75,10 +80,10 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 			userRepo.save(user);
 		}
-		if(userADmin.get().getUserRoles().isEmpty()){
+		if(userAdmin.get().getUserRoles().isEmpty()){
 			UserRole userRole = new UserRole();
 
-			userRole.setUser(userADmin.get());
+			userRole.setUser(userAdmin.get());
 			userRole.setRole(admin.get());
 			userRoleRepo.save(userRole);
 		}

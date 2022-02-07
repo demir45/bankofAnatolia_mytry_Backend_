@@ -24,10 +24,7 @@ public class UserDetailsSecurityServiceImpl implements UserDetailsService {
 
        User user = userRepo.findBySsn(ssn)
                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with ssn: " + ssn));
-        System.out.println("========================== ");
-        System.out.println("UserDetailsSecurityServiceImpl/loadUserByUsername içinde ssn: " + ssn);
-        System.out.println("UserDetailsSecurityServiceImpl/loadUserByUsername içinde username: " + user.getUsername());
-        System.out.println("========================== ");
+
         return UserDetailsImpl.build(user);
     }
 }
