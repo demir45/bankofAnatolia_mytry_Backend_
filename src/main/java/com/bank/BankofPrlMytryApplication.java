@@ -59,11 +59,12 @@ class DemoCommandLineRunner implements CommandLineRunner{
 		}
 
 		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
+
 		if(!userADmin.isPresent()){
 
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			User user = new User();
-			UserRole userRole = new UserRole();
+
 
 			user.setSsn("123-45-6789");
 			user.setFirstName("John");
@@ -73,9 +74,12 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			user.setUsername("johnwick");
 			user.setDob(LocalDate.of(1995, 12, 15));
 
-			userRole.setUser(user);
-			userRole.setRole(admin.get());
 			userRepo.save(user);
+		}
+		if(userADmin.get().getUserRoles().isEmpty()){
+			UserRole userRole = new UserRole();
+			userRole.setUser(userADmin.get());
+			userRole.setRole(admin.get());
 		}
 
 
