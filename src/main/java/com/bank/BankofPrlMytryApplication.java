@@ -59,8 +59,6 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 		// add admin
 		Optional<User> userADmin = userRepo.findBySsn("123-45-6789");
-		userADmin.get().setPassword("123456");
-		userRepo.save(userADmin.get());
 
 		if(!userADmin.isPresent()){
 
@@ -71,7 +69,7 @@ class DemoCommandLineRunner implements CommandLineRunner{
 			user.setFirstName("John");
 			user.setLastName("Wick");
 			user.setEmail("wick@gmail.com");
-			user.setPassword("12345");
+			user.setPassword("123456");
 			user.setUsername("johnwick");
 			user.setDob(LocalDate.of(1995, 12, 15));
 
