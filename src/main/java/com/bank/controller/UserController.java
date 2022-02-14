@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "https://bankofprl.netlify.app", allowedHeaders = "*")
+@CrossOrigin(origins = "https://bankofanatoliaa.netlify.app", allowedHeaders = "*")
 @RestController
 @RequestMapping()
 public class UserController {
